@@ -28,6 +28,92 @@
 
 /* MAIN CARD */
 
+
+/* PAYMENT GRID REFINEMENT */
+.payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.payment-option {
+    cursor: pointer;
+}
+
+.payment-option input {
+    display: none; /* Hide original radio */
+}
+
+.payment-card-content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-option input:checked + .payment-card-content {
+    background: rgba(112, 161, 255, 0.15);
+    border-color: #70a1ff;
+    box-shadow: 0 0 15px rgba(112, 161, 255, 0.3);
+}
+
+.payment-card-content img {
+    height: 40px;
+    width: auto;
+    border-radius: 8px;
+}
+
+/* UPLOAD BOX REFINEMENT */
+.checkout-upload-box {
+    position: relative;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.checkout-upload-box:hover {
+    border-color: #70a1ff;
+    background: rgba(112, 161, 255, 0.05);
+}
+
+.upload-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    opacity: 0.6;
+}
+
+.upload-content p span {
+    color: #70a1ff;
+    text-decoration: underline;
+}
+
+.checkout-upload-box input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* TRUST BADGES */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
 .checkout-card{
 
     width: 100%;
@@ -303,63 +389,181 @@
     </div>
 </div>
     </header>
+
 <main id="checkoutmain" class="checkout-layout">
 
-   <div class="checkout-card">
+    <!-- LEFT SIDE -->
+    <div class="payment-half-1">
 
-    <div class="checkout-product">
-        <img class="checkout-product-image">
+        <!-- ORDER SUMMARY -->
+        <div class="checkout-section">
 
-        <div class="checkout-product-info">
-            <h2 class="checkout-product-title"></h2>
+            <h3 class="checkout-section-title">
+                Order Summary
+            </h3>
 
-            <div class="checkout-prices">
-                <span class="checkout-price"></span>
-                <span class="checkout-old-price"></span>
+            <div class="checkout-product">
+
+                <img
+                    class="checkout-product-image"
+                    src="./images/product-placeholder.jpg"
+                    alt="Product"
+                >
+
+                <div class="checkout-product-info">
+
+                    <h2 class="checkout-product-title">
+                        The Ultimate Gaming Bundle
+                    </h2>
+
+                    <div class="checkout-prices">
+                        <span class="checkout-price">
+                            $350.00
+                        </span>
+
+                        <span class="checkout-old-price">
+                            $450.00
+                        </span>
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
+
     </div>
 
-    <h3>please specify your payment method</h3>
+    <!-- RIGHT SIDE -->
+    <div class="payment-half-2">
 
-    <div class="checkout-payment-methods">
+        <!-- PAYMENT METHODS -->
+        <div class="checkout-section">
 
+            <h3 class="checkout-section-title">
+                Select Payment Method
+            </h3>
 
-      <div class="input-method-wrapper">       
-        
-        <input type="radio" name="mbok" id="">
-        <label for="mbok"></label>
-            <img class="payment-card" src="./images/paymentmethods/mboktest.png" alt="">
+            <div class="payment-grid">
 
-       </div>
+                <label class="payment-option">
 
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="mbok"
+                        checked
+                    >
 
+                    <div class="payment-card-content">
 
+                        <img
+                            src="./images/paymentmethods/mboktest.png"
+                            alt="Zain Cash"
+                        >
 
+                        <span>Zain Cash</span>
 
-       <div class="input-method-wrapper">
-        <input type="radio" name="mbok" id="">
-        <label for="mbok"></label>
-            <img class="payment-card" src="./images/paymentmethods/cashi.png" alt="">
+                    </div>
 
-       </div>
-</div>
+                </label>
 
-    <h3>please upload payment proof</h3>
+                <label class="payment-option">
 
-    <div class="checkout-upload-box">
-        <input type="file" class="js-payment-proof">
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="cashi"
+                    >
+
+                    <div class="payment-card-content">
+
+                        <img
+                            src="./images/paymentmethods/cashi.png"
+                            alt="Bankily"
+                        >
+
+                        <span>Bankily</span>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- UPLOAD -->
+        <div class="checkout-section">
+
+            <h3 class="checkout-section-title">
+                Upload Payment Proof
+            </h3>
+
+            <div class="checkout-upload-box" id="dropzone">
+
+                <div class="upload-content">
+
+                    <svg
+                        class="upload-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                    </svg>
+
+                    <p>
+                        Drag & drop file here or
+                        <span>click to upload</span>
+                    </p>
+
+                    <input
+                        type="file"
+                        class="js-payment-proof"
+                        id="fileInput"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button class="checkout-submit-btn js-submit-order">
+
+            <svg
+                style="width:18px;height:18px;margin-right:8px"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+            </svg>
+
+            Complete Purchase
+
+        </button>
+
     </div>
-
-    <button class="checkout-submit-btn js-submit-order">
-        Complete Purchase
-    </button>
-
-</div>
 
 </main>
 
+<!-- TRUST BADGES -->
+<div class="trust-badges">
 
+    <span>🛡️ SSL Secured</span>
+
+    <span>✅ Verified Seller</span>
+
+</div>
     <footer class="footer ">
 
 		<h2 class="contact-us">contact us</h2>

@@ -39,12 +39,13 @@
     <div class="product-talk colorwhite">
 
         <h1 id="productName"></h1>
-        
 
+
+        <div class="info-group">
         <h2 class="price" id="productPrice"></h2>
         <h2 class="old-price" id="productOldPrice"></h2>
-       <h2 class="disount-percantage" id="discoutperantage"></h2>
-
+       <h2 class="sale-label" id="salelabel">SALE</h2>
+</div>
 
 
         <link rel="stylesheet"
@@ -162,9 +163,8 @@ async function loadProduct() {
   const id = getProductId();
 
   const res = await fetch("./api/getProducts.php");
-  const products = await res.text();
+  const products = await res.json();
 
-  console.log(products)
 
   const p = products.find(prod => prod.product_id == id);
 
@@ -198,6 +198,17 @@ async function loadProduct() {
   document.getElementById("productDesc").innerText = p.description_en;
   document.getElementById("productWarning").innerText = p.warning_en;
   document.getElementById("productImage").src = p.product_image;
+   // Optional: old price & discount
+  if (parseInt(p.discount_percentage) > 0) {
+
+    console.log(p.discount_percentage)
+    document.getElementById("productOldPrice").style.display = "inline"
+        document.getElementById("salelabel").style.display = "inline"
+
+    document.getElementById("productOldPrice").innerText = `$${p.price_before_discount}`;
+    const discount = ((p.old_price - p.sell_price) / p.old_price * 100).toFixed(0);
+    document.getElementById("discoutperantage").innerText = `${discount}% OFF`;
+  }
 
 
   const buyBtn = document.getElementById("buyBtn");
@@ -207,12 +218,7 @@ async function loadProduct() {
 buyBtn.addEventListener("click", () => {
   window.location.href = `./checkout.html?id=${p.product_id}`;
 });
-  // Optional: old price & discount
-  if (p.old_price) {
-    document.getElementById("productOldPrice").innerText = `$${p.old_price}`;
-    const discount = ((p.old_price - p.sell_price) / p.old_price * 100).toFixed(0);
-    document.getElementById("discoutperantage").innerText = `${discount}% OFF`;
-  }
+ 
 }
 
 

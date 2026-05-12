@@ -423,7 +423,7 @@ a {
 }
 
 .price {
-    color: #315c93;
+    color: var(--color-accent);
     display: inline;
     /* background-color: #315c9e; */
     border-radius: var(--radius-main);
@@ -438,8 +438,8 @@ a {
 }
 
 .old-price {
-    display:inline ;
-    color: red;
+    display:none ;
+    color: #b0b1b6;
         margin-left: 10px;
 
     text-decoration: line-through;

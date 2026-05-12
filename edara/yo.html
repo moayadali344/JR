@@ -342,20 +342,40 @@ button {
     <input  id="product_id"type="text" disabled placeholder="id of product(entred autmotic)">    <br>    <br>
 
 
-    <input id="name_en" placeholder="Product Name EN"><br><br>
-    <input id="name_ar" placeholder="Product Name AR"><br><br>
-    <input id="buy_price" placeholder="Buy Price"><br><br>
-    <input id="sell_price" placeholder="Sell Price"><br><br>
-        <input id="discount" type="number" placeholder="Discount (%) typed like 10 will be applied to sell price" min="0" max="100"><br><br>
+  <!-- Product Names -->
+<label for="name_en">Product Name (English):</label><br>
+<input id="name_en" placeholder="e.g. Organic Coffee"><br><br>
 
-    <textarea id="desc_en" placeholder="Description EN"></textarea><br><br>
-    <textarea id="desc_ar" placeholder="Description AR"></textarea><br><br>
+<label for="name_ar">Product Name (Arabic):</label><br>
+<input id="name_ar" placeholder="اسم المنتج"><br><br>
 
-    <input id="warning_en" placeholder="Warning EN"><br><br>
-    <input id="warning_ar" placeholder="Warning AR"><br><br>
+<!-- Pricing -->
+<label for="buy_price">Buy Price:</label><br>
+<input id="buy_price" type="number" step="0.01" placeholder="0.00"><br><br>
 
-    <input type="file" name="productimg" id="image"><br><br>
+<label for="sell_price">Sell Price:</label><br>
+<input id="sell_price" type="number" step="0.01" placeholder="0.00"><br><br>
 
+<label for="discount">Discount (%):</label><br>
+<input id="discount" type="number" placeholder="e.g. 10" min="0" max="100"><br><br>
+
+<!-- Descriptions -->
+<label for="desc_en">Description (English):</label><br>
+<textarea id="desc_en" placeholder="Enter English description..."></textarea><br><br>
+
+<label for="desc_ar">Description (Arabic):</label><br>
+<textarea id="desc_ar" placeholder="أدخل الوصف بالعربية..."></textarea><br><br>
+
+<!-- Warnings -->
+<label for="warning_en">Warning (English):</label><br>
+<input id="warning_en" placeholder="e.g. Keep out of reach of children"><br><br>
+
+<label for="warning_ar">Warning (Arabic):</label><br>
+<input id="warning_ar" placeholder="تحذير"><br><br>
+
+<!-- Product Image -->
+<label for="image">Product Image:</label><br>
+<input type="file" name="productimg" id="image"><br><br>
     <button class="done" onclick="saveProduct()">Save</button>
     <button onclick="resetForm()">Clear</button>
   </div>
@@ -601,7 +621,7 @@ function renderProducts() {
       <tr>
         <td>${p.product_id}</td>
         <td>
-          ${p.product_image ? `<img src="${p.product_image}" width="50"><br>` : ""}
+          ${p.product_image ? `<img src="../${p.product_image}" width="50"><br>` : ""}
           ${p.product_name_en}
         </td>
         <td>$${p.buy_price}</td>
@@ -637,9 +657,11 @@ function fillForm(id) {
   document.getElementById("buy_price").value = product.buy_price;
 
 
-  document.getElementById("sell_price").value = product.sell_price;
+  document.getElementById("sell_price").value = product.price_before_discount;
 document.getElementById("sell_price").dispatchEvent(new Event("input"));
 
+  document.getElementById("discount").value = product.discount_percentage;
+document.getElementById("discount").dispatchEvent(new Event("input"));
 
   document.getElementById("desc_en").value = product.description_en;
   document.getElementById("desc_ar").value = product.description_ar;

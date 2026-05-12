@@ -262,7 +262,7 @@ color: white;
 }
 
 .reviews  {
-    display: inline;
+    display: flex;
 }
 
 .review-user img{
@@ -276,6 +276,31 @@ color: white;
 
     border:
     2px solid rgba(255,255,255,0.08);
+}
+
+#productName{
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size:45px ;
+}
+
+.info-group {
+    display: flex;
+    align-items: center;
+}
+
+.info-group h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.sale-label{
+    display: none;
+  font-size: 15px;
+  background-color: red;
+  padding: 6px 7px;
+  border-radius: var(--radius-main);
+  margin-left: 7px;
+
 }
 
 .review-input {
