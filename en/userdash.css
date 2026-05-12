@@ -1,0 +1,250 @@
+:root {
+    --color-primary: #ff4757;
+    --color-secondary: #2f3542;
+    --color-accent: #70a1ff;
+    --color-bg: #111827;
+    --color-white: #111827;
+    --color-header:#25252585;
+    --color-text:#fff;
+    --boeder-color :#ccc;
+    
+    --radius-main: 12px;
+    --spacing-main: 20px;
+    --secpadding:45px;
+    --leftrightpadding :5%;
+}
+
+.user-dashboard-header{
+    justify-content: space-between;
+}
+
+.user-dashboard-container{
+    margin-left: calc(var(--leftrightpadding) * 4);
+    margin-right: calc(var(--leftrightpadding) * 4);
+}
+
+/* ================= PROFILE ================= */
+
+.profile-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--secpadding) 0;
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.member-since {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.profile-settings {
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+/* ================= PURCHASE SECTION ================= */
+
+.purchases-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: var(--secpadding) 0;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* CARD */
+.purchase-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.purchase-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* LEFT */
+.icon-box{
+    display: flex;
+    align-items: center;
+}
+
+.icon-box img {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px; /* FIXED invalid var */
+    margin-right: 12px;
+}
+
+/* ================= ACTIONS ================= */
+
+.purchase-actions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BUTTON */
+.credentials-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.credentials-btn:hover {
+  background: #5d8eff;
+  transform: translateY(-1px);
+}
+
+.credentials-btn:disabled {
+  background: #555;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* ================= STATUS ================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 12px;
+    border-radius: 999px;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+/* SUCCESS (calm green, not loud) */
+.status.success {
+    background: rgba(46, 204, 113, 0.12);
+    color: #2ecc71;
+    box-shadow: 0 0 0 1px rgba(46, 204, 113, 0.15);
+}
+
+/* PENDING (warm amber, soft attention) */
+.status.pending {
+    background: rgba(241, 196, 15, 0.12);
+    color: #f1c40f;
+    box-shadow: 0 0 0 1px rgba(241, 196, 15, 0.15);
+}
+
+/* ICON */
+.noti {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ================= META (date + price) ================= */
+
+.purchase-meta {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    color: #aaa;
+    line-height: 1.2;
+}
+
+.purchase-meta .price {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+/* ================= BUTTON (FIXED SIZE UI STABILITY) ================= */
+
+.credentials-btn {
+    width: 140px;              /* fixed width prevents UI shift */
+    height: 34px;              /* consistent height */
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--color-accent);
+    color: #fff;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition: all 0.2s ease;
+}
+
+/* hover */
+.credentials-btn:hover {
+    background: #5d8eff;
+    transform: translateY(-1px);
+}
+
+/* active */
+.credentials-btn:active {
+    transform: scale(0.97);
+}
+
+/* disabled (pending state) */
+.credentials-btn:disabled {
+    background: #3a3a3a;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+div span {
+    color: white;
+}

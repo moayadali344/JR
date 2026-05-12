@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #eef2f7;
+}
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 25px;
+}
+
+.value.id {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.sidebar li {
+  list-style: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.sidebar li:hover {
+  background: #1e293b;
+}
+
+
+
+ .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+  }
+  .stat-card{
+    margin-bottom: 10px;
+  }
+
+
+  .edit-btn {
+    background-color: #28a745; /* green */
+  }
+
+  .edit-btn:hover {
+    background-color: #218838;
+  }
+
+  .delete-btn {
+    background-color: #dc3545; /* red */
+  }
+
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+.ver{
+    color: green;
+}
+
+.notver{
+    color: red;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+/* Request Card */
+.request-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.proof-img {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+
+.proof-img:hover {
+  transform: scale(1.05);
+}
+.request-grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 13px;
+  color: #555;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.controls {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+input, select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.buttons {
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.done {
+  background: #22c55e;
+  color: white;
+}
+
+.reject {
+  background: #ef4444;
+  color: white;
+}
+
+
+
+
+
+.stat-green {
+  border-left: 6px solid #22c55e;
+}
+
+.stat-blue {
+  border-left: 6px solid #3b82f6;
+}
+
+.stat-yellow {
+  border-left: 6px solid #f59e0b;
+}
+
+.stat-red {
+  border-left: 6px solid #ef4444;
+}
+/* Toggle */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+/* Home & Analytics Cards */
+.stat-card, .analytics-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover, .analytics-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #0f172a;
+  margin: 10px 0;
+}
+
+.stat-sub {
+  font-size: 14px;
+  color: #22c55e;
+}
+
+.analytics-card h3 {
+  margin: 0 0 15px 0;
+  color: #0f172a;
+  font-size: 18px;
+}
+
+.analytics-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3b82f6;
+  margin: 10px 0;
+}
+
+.analytics-detail {
+  color: #22c55e;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.analytics-sub {
+  font-size: 14px;
+  color: #666;
+}
+
+.analysis-item {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Admin</h2>
+   <ul>
+  <li onclick="showSection('home')">🏠 Home</li>
+  <li onclick="showSection('requests')">📥 Requests</li>
+  <li onclick="showSection('done')">✅ Done Requests</li>
+<li onclick="showSection('rejected')">❌ Rejected Requests</li>
+  <li onclick="showSection('usd')">💱 USD Price</li>
+  <li onclick="showSection('addProduct')">📦 Add Product</li>
+  <li onclick="showSection('analysis')">📊 Data Analysis</li>
+</ul>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Home Dashboard -->
+<section id="home" class="section">
+  <h2>🏠 Dashboard Home</h2>
+  <div id="homeContent"></div>
+</section>
+
+    <!-- Requests -->
+    <section id="requests" class="section active">
+      <h2>Incoming Requests</h2>
+        <div id="requestsList"></div>
+
+    </section>
+
+    <!-- Other Sections -->
+<section id="done" class="section">
+  <h2>✅ Done Requests</h2>
+  <div id="doneList"></div>
+</section>
+
+<section id="rejected" class="section">
+  <h2>❌ Rejected Requests</h2>
+  <div id="rejectedList"></div>
+</section>
+
+
+<section id="usd" class="section">
+  <h2>USD Price</h2>
+  <div class="request-card">
+    <div class="label">Current USD Price</div>
+    <div id="usdDisplay" class="value">notcomeyet</div>
+    <br>
+    <input type="number" id="usdInput" placeholder="Enter new price">
+    <div class="buttons">
+      <button class="done" onclick="updateusdprice()">Update Price</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="addProduct" class="section">
+  <h2>Products</h2>
+
+  <!-- FORM -->
+  <div class="request-card">
+    <h3 id="formTitle">Add Product</h3>
+
+
+    <input  id="product_id"type="text" disabled placeholder="id of product(entred autmotic)">    <br>    <br>
+
+
+    <input id="name_en" placeholder="Product Name EN"><br><br>
+    <input id="name_ar" placeholder="Product Name AR"><br><br>
+    <input id="buy_price" placeholder="Buy Price"><br><br>
+    <input id="sell_price" placeholder="Sell Price"><br><br>
+        <input id="discount" type="number" placeholder="Discount (%) typed like 10 will be applied to sell price" min="0" max="100"><br><br>
+
+    <textarea id="desc_en" placeholder="Description EN"></textarea><br><br>
+    <textarea id="desc_ar" placeholder="Description AR"></textarea><br><br>
+
+    <input id="warning_en" placeholder="Warning EN"><br><br>
+    <input id="warning_ar" placeholder="Warning AR"><br><br>
+
+    <input type="file" name="productimg" id="image"><br><br>
+
+    <button class="done" onclick="saveProduct()">Save</button>
+    <button onclick="resetForm()">Clear</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="request-card">
+    <h3>Product List</h3>
+
+    <table width="100%" border="1" cellpadding="10" style="border-collapse: collapse;">
+     <thead>
+  <tr>
+    <th>ID</th>
+    <th>Product Name</th>
+    <th>Buy Price</th>
+    <th>Sell Price</th>
+    <th>Profit</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+      <tbody id="productTable"></tbody>
+    </table>
+  </div>
+  </section>
+
+<section id="analysis" class="section">
+  <h2>📊 Data Analysis</h2>
+  <div id="analysisContent"></div>
+</section>
+  </main>
+
+</div>
+
+<script>
+  let products = [];
+let requests = [];
+let usdToSdgRate = 0;
+
+let revenue = 0;
+let capital = 0;
+let profit = 0;
+let done = 0;
+let incoming = 0;
+loadSettings();
+
+
+
+
+
+async function loadSettings() {
+  const res = await fetch("../api/usd.php");
+  const data = await res.json();
+
+  usdToSdgRate = Number(data.usd_rate);
+}
+
+let sellpriceonglobe = null;
+
+document.getElementById("sell_price").addEventListener("input",function (){
+let sell_price = document.getElementById("sell_price").value;
+sellpriceonglobe = sell_price
+
+})
+
+function applyDiscount() {
+  const sellement = document.getElementById("sell_price")
+  const sell = Number(sellement.value);
+  const discount = Number(document.getElementById("discount").value);
+
+ 
+
+  const finalPrice = sellpriceonglobe - (sellpriceonglobe * discount / 100);
+
+  sellement.value = finalPrice;
+}
+
+
+
+
+/* ======================
+   INIT
+====================== */
+// function init() {
+  // loadProducts();
+  // loadRequests();
+  // no need it will load on section click
+
+  
+// }
+
+// init();
+
+/* ======================
+   LOAD FROM BACKEND
+====================== */
+async function loadProducts() {
+  const res = await fetch("./actions/getProducts.php");
+  products = await res.json();
+
+  renderProducts();
+}
+
+function renderRequests() {
+  const container = document.getElementById("requestsList");
+  container.innerHTML = "";
+
+  const incoming = requests.filter(r => r.request_status === "pending");
+
+  incoming.forEach(req => {
+    container.innerHTML += `
+      <div class="request-card">
+
+        <div class="request-grid">
+
+          <div class="label">Request ID</div>
+  <div class="value">#${req.request_id}</div>
+
+          <div>
+            <div class="label">User</div>
+            <div class="value">${req.username}</div>
+          </div>
+
+          <div>
+            <div class="label">Product</div>
+            <div class="value">${req.product_name_en}</div>
+          </div>
+
+          <div>
+            <div class="label">Quantity</div>
+            <div class="value">${req.quantity}</div>
+          </div>
+
+          <div>
+            <div class="label">Total Price</div>
+            <div class="value">$${req.total_price}</div>
+          </div>
+
+          <div>
+            <div class="label">Paid</div>
+            <div class="value">$${req.paid_price}</div>
+          </div>
+
+          <div>
+            <div class="label">Payment Method</div>
+            <div class="value">${req.payment_method}</div>
+          </div>
+
+          <div>
+            <div class="label">Payment Status</div>
+            <div class="${req.payment_status === 'paid' ? 'ver' : 'notver'} value">
+              ${req.payment_status}
+            </div>
+          </div>
+
+          <div>
+            <div class="label">Proof</div>
+            ${
+              req.payment_proof
+                ? `<img src="${req.payment_proof}" class="proof-img" onclick="openImage(this.src)">`
+                : "No proof"
+            }
+          </div>
+
+        </div>
+
+        <div class="controls">
+          <input id="result_${req.request_id}" placeholder="Write result...">
+
+          <select id="payment_${req.request_id}">
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+
+        <div class="buttons">
+          <button class="done" onclick="markDone(${req.request_id})">Done</button>
+          <button class="reject" onclick="reject(${req.request_id})">Reject</button>
+        </div>
+
+      </div>
+    `;
+  });
+}
+
+
+
+
+let discountelment = document.getElementById("discount")
+discountelment.addEventListener("input", applyDiscount)
+/* ======================
+   UPDATE REQUEST
+====================== */
+async function markDone(id) {
+  const result = document.getElementById(`result_${id}`).value;
+  const payment = document.getElementById(`payment_${id}`).value;
+
+  await fetch("./actinos/updateRequest.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      request_id: id,
+      status: "done",
+      result: result,
+      payment_status: payment
+    })
+  });
+
+  loadRequests();
+}
+
+async function reject(id) {
+  if (!confirm("Reject request?")) return;
+
+    const result = document.getElementById(`result_${id}`).value;
+  const payment = document.getElementById(`payment_${id}`).value;
+
+  await fetch("../api/updateRequest.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      request_id: id,
+      status: "rejected",
+      result: result,
+      payment_status: payment
+    })
+  });
+
+  loadRequests();
+}
+
+/* ======================
+   PRODUCTS
+====================== */
+function renderProducts() {
+  const table = document.getElementById("productTable");
+  if (!table) return;
+
+  table.innerHTML = "";
+
+  products.forEach(p => {
+    const profit = p.sell_price - p.buy_price;
+
+    table.innerHTML += `
+      <tr>
+        <td>${p.product_id}</td>
+        <td>
+          ${p.product_image ? `<img src="${p.product_image}" width="50"><br>` : ""}
+          ${p.product_name_en}
+        </td>
+        <td>$${p.buy_price}</td>
+        <td>$${p.sell_price}</td>
+        <td style="color:green;">$${profit}</td>
+        <td>
+<button class="btn edit-btn" onclick="fillForm(${p.product_id})">Edit</button>
+<button "edit-product1" class="btn delete-btn">Delete</button></td>
+      </tr>
+    `;
+  });
+
+
+
+}
+
+async function loadRequests() {
+  const res = await fetch("./actions/getRequests.php");
+  requests = await res.json();
+
+}
+
+function fillForm(id) {
+  const product = products.find(p => p.product_id == id);
+
+  if (!product) return;
+
+
+  // Fill inputs
+  document.getElementById("product_id").value = product.product_id;
+  document.getElementById("name_en").value = product.product_name_en;
+  document.getElementById("name_ar").value = product.product_name_ar;
+  document.getElementById("buy_price").value = product.buy_price;
+
+
+  document.getElementById("sell_price").value = product.sell_price;
+document.getElementById("sell_price").dispatchEvent(new Event("input"));
+
+
+  document.getElementById("desc_en").value = product.description_en;
+  document.getElementById("desc_ar").value = product.description_ar;
+
+  document.getElementById("warning_en").value = product.warning_en;
+  document.getElementById("warning_ar").value = product.warning_ar;
+
+  // UI change (optional now)
+  document.getElementById("formTitle").innerText = "Edit Product";
+}
+
+/* ======================
+   ANALYTICS (REAL DATA)
+====================== */
+
+/* ======================
+   USD
+====================== */
+async function updateusdprice() {
+  const input = document.getElementById("usdInput").value;
+
+  if (!input || input <= 0) {
+    alert("Invalid rate");
+    return;
+  }
+
+  const rate = parseFloat(input);
+
+  // 👉 send to backend
+  await fetch("./actions/updateusd.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      usd_rate: rate
+    })
+  });
+
+  // 👉 update UI
+  usdToSdgRate = rate;
+
+  document.getElementById("usdDisplay").innerHTML =
+    `1 USD = ${usdToSdgRate} SDG`;
+}
+/* ======================
+   SECTION SWITCH
+====================== */
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec =>
+    sec.classList.remove('active')
+  );
+
+  document.getElementById(id).classList.add('active');
+
+  if (id === "requests") renderRequests();
+  if (id === "addProduct") loadProducts();
+  if(id === "usd") showusd();
+   if (id === "home") loadhome();
+
+
+  if (id === "done") {
+    loadDoneRequests();
+  }
+
+  if (id === "rejected") {
+    loadRejectedRequests();
+  }
+
+
+}
+
+
+function loadDoneRequests() {
+  const done = requests.filter(r => r.request_status === "done");
+
+  document.getElementById("doneList").innerHTML =
+    done.map(renderRequestCard).join("");
+}
+
+function loadRejectedRequests() {
+  const rejected = requests.filter(r => r.request_status === "rejected");
+
+  document.getElementById("rejectedList").innerHTML =
+    rejected.map(renderRequestCard).join("");
+}
+
+function renderRequestCard(r) {
+  return `
+    <div class="request-card">
+      <div><b>request id:</b> ${r.request_id}</div>
+
+      <div><b>User:</b> ${r.username}</div>
+      <div><b>Product:</b> ${r.product_name_en}</div>
+      <div><b>Qty:</b> ${r.quantity}</div>
+      <div><b>Total:</b> $${r.total_price}</div>
+
+      <div><b>Status:</b> ${r.request_status}</div>
+
+      <div class="controls">
+        <input id="result_${r.request_id}" value="${r.request_result || ''}">
+        
+        <select id="payment_${r.request_id}">
+          <option ${r.payment_status==='pending'?'selected':''}>pending</option>
+          <option ${r.payment_status==='paid'?'selected':''}>paid</option>
+        </select>
+      </div>
+
+      <div class="buttons">
+        <button class="done" onclick="markDone(${r.request_id})">Update</button>
+        <button class="reject" onclick="reject(${r.request_id})">Reject</button>
+      </div>
+
+    </div>
+  `;
+}
+function calculateHomeStats() {
+
+  revenue = 0;
+  capital = 0;
+  done = 0;
+  incoming = 0;
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const todayRequests = requests.filter(r =>
+    r.created_at && r.created_at.startsWith(today)
+  );
+
+  todayRequests.forEach(r => {
+
+    const quantity = Number(r.quantity || 0);
+
+    // DONE orders only
+    if (r.request_status === "done") {
+
+      done++;
+
+      // 💰 money from customer
+      revenue += Number(r.paid_price || 0);
+
+      // 📦 your cost
+      capital += Number(r.product_buy_price || 0) * quantity;
+    }
+
+    // incoming
+    if (r.request_status === "pending") {
+      incoming++;
+    }
+
+  });
+
+  profit = revenue - capital;
+}
+async function loadhome(){
+
+ await loadRequests();
+  calculateHomeStats();
+ const container = document.getElementById("homeContent");
+
+container.innerHTML = `
+  <div class="stat-card stat-blue">
+    <div class="stat-label">Revenue (Today)</div>
+    <div class="stat-value">$${revenue.toFixed(2)}</div>
+  </div>
+
+  <div class="stat-card stat-yellow">
+    <div class="stat-label">Capital (Today)</div>
+    <div class="stat-value">$${capital.toFixed(2)}</div>
+  </div>
+
+  <div class="stat-card stat-green">
+    <div class="stat-label">Profit (Today)</div>
+    <div class="stat-value">$${profit.toFixed(2)}</div>
+  </div>
+
+  <div class="stat-card stat-green">
+    <div class="stat-label">Done Requests</div>
+    <div class="stat-value">${done}</div>
+  </div>
+
+  <div class="stat-card stat-red">
+    <div class="stat-label">Incoming Requests</div>
+    <div class="stat-value">${incoming}</div>
+  </div>
+`;
+}
+
+
+
+
+
+function showusd(){
+  document.getElementById("usdDisplay").innerHTML =
+    `1 USD = ${usdToSdgRate} SDG`;
+}
+
+
+async function saveProduct() {
+
+
+  if(document.getElementById("product_id").value.trim() === ""){
+
+      const formData = new FormData();
+
+  formData.append("name_en", document.getElementById("name_en").value);
+  formData.append("name_ar", document.getElementById("name_ar").value);
+  formData.append("buy_price", document.getElementById("buy_price").value);
+  formData.append("sell_price", document.getElementById("sell_price").value);
+
+  formData.append("desc_en", document.getElementById("desc_en").value);
+  formData.append("desc_ar", document.getElementById("desc_ar").value);
+
+  formData.append("warning_en", document.getElementById("warning_en").value);
+  formData.append("warning_ar", document.getElementById("warning_ar").value);
+  formData.append("discount_percentage", document.getElementById("discount").value || 0);
+
+
+  //here will append price before discount
+  formData.append("price_before_discount",sellpriceonglobe) 
+
+
+
+  const file = document.getElementById("image").files[0];
+  if (file) {
+    formData.append("productimg", file);
+  }
+
+  await fetch("./actions/addproduct.php", {
+    method: "POST",
+    body: formData
+  }).then(r => r.text().then(r => console.log(r)))
+
+
+  loadProducts();
+  resetForm();
+
+
+    ///////////////////
+
+
+  }else{
+  const formData = new FormData();
+
+  formData.append("product_id",document.getElementById("product_id").value.trim() );
+
+  formData.append("name_en", document.getElementById("name_en").value);
+  formData.append("name_ar", document.getElementById("name_ar").value);
+  formData.append("buy_price", document.getElementById("buy_price").value);
+  formData.append("sell_price", document.getElementById("sell_price").value);
+
+  formData.append("desc_en", document.getElementById("desc_en").value);
+  formData.append("desc_ar", document.getElementById("desc_ar").value);
+
+  formData.append("warning_en", document.getElementById("warning_en").value);
+  formData.append("warning_ar", document.getElementById("warning_ar").value);
+formData.append("discount_percentage", document.getElementById("discount").value || 0);
+  formData.append("price_before_discount",sellpriceonglobe) 
+
+  const file = document.getElementById("image").files[0];
+  if (file) {
+    formData.append("productimg", file);
+  }
+
+  await fetch("./actions/editproduct.php", {
+    method: "POST",
+    body: formData
+  }).then(res => res.text()).then(e => console.log(e))
+
+  resetForm();
+  loadProducts();
+
+  }
+
+} 
+
+function editProduct(id) {
+
+  document.getElementById("product_id").value = id;
+  document.getElementById("name_en").value = p.product_name_en;
+  document.getElementById("name_ar").value = p.product_name_ar;
+  document.getElementById("buy_price").value = p.buy_price;
+  document.getElementById("sell_price").value = p.sell_price;
+
+  document.getElementById("desc_en").value = p.description_en;
+  document.getElementById("desc_ar").value = p.description_ar;
+
+  document.getElementById("warning_en").value = p.warning_en;
+  document.getElementById("warning_ar").value = p.warning_ar;
+
+  document.getElementById("formTitle").innerText = "Edit Product";
+}
+function resetForm() {
+
+  // Clear all inputs + textareas inside this section
+  document.querySelectorAll("#addProduct input, #addProduct textarea")
+    .forEach(el => {
+      if (el.type === "file") {
+        el.value = ""; // reset file input
+      } else {
+        el.value = "";
+      }
+    });
+
+  // Reset editing mode
+  editingProductId = null;
+
+  // Clear ID field (just in case)
+  document.getElementById("product_id").value = "";
+
+  // Reset title
+  document.getElementById("formTitle").innerText = "Add Product";
+
+  // (Optional) reset button text
+  const btn = document.querySelector("#addProduct .done");
+  if (btn) btn.innerText = "Save";
+}
+</script>
+
+
+</body>
+</html>
+

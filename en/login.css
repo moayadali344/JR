@@ -1,0 +1,202 @@
+:root {
+  --spacing-main: 30px;
+  --radius-main: 16px;
+  --color-text: #ffffff;
+}
+
+/* Background */
+
+.main-login {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin-top: 150px;
+  /* vertical center */
+    /* full screen center */
+}
+
+/* Better social button layout */
+.social-btn {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+/* Optional: make Google button feel more "real" */
+.google-btn svg {
+  flex-shrink: 0;
+}
+
+.social-btn span{
+justify-self: center;
+}
+
+/* Better spacing */
+.auth-card h2 {
+  margin-top: 10px;
+}
+
+.logo-center {
+    text-align: center;
+}
+
+/* Auth Card */
+.auth-card {
+  width: 360px;
+  padding: var(--spacing-main);
+  border-radius: var(--radius-main);
+  color: var(--color-text);
+  background: rgba(20, 25, 40, 0.6);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(100, 150, 255, 0.08);
+
+  transition: 0.3s ease;
+  transform: translateY(0);
+
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* Glass shine */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Title */
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #6ea8ff;
+  box-shadow: 0 0 10px rgba(110,168,255,0.4);
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6ea8ff, #4a7cff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(110,168,255,0.4);
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Social Buttons */
+.social-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.social-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* Footer text */
+.footerform {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.footerform a {
+  color: #6ea8ff;
+  text-decoration: none;
+}
+
+.forgot {
+  text-align: right;
+    margin-top: 15px;
+color: white;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+.forgot a {
+    color: white;
+    text-decoration: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+.footerend{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

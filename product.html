@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="user-section.css">
+        <link rel="stylesheet" href="./product.css">
+
+</head>
+<body>
+
+
+    <header class="header">
+        <div class="logo">
+            <a href="./index.html">            <span class="logo-primary">JR</span><span class="logo-secondary">SHOP</span>
+</a>
+        </div>
+
+
+		<div class="form-container">
+        <input  type="text" class="search-bar" placeholder="Search">
+		<button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; "><path d="M11 2a9 9 0 105.641 16.01.966.966 0 00.152.197l3.5 3.5a1 1 0 101.414-1.414l-3.5-3.5a1 1 0 00-.197-.153A8.96 8.96 0 0020 11a9 9 0 00-9-9Zm0 2a7 7 0 110 14 7 7 0 010-14Z"></path></svg></button>
+</div>
+        <div class="header-actions">
+
+
+        </div>
+
+
+ 
+   </header>
+
+ <main class="product-go-here">
+
+    <img id="productImage" src="" alt="">
+
+    <div class="product-talk colorwhite">
+
+        <h1 id="productName"></h1>
+        
+
+        <h2 class="price" id="productPrice"></h2>
+        <h2 class="old-price" id="productOldPrice"></h2>
+       <h2 class="disount-percantage" id="discoutperantage"></h2>
+
+
+
+        <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<div class="rating-system">
+<!-- here the product stars and rating cureent rating users dont votre or rate here  -->
+  <div class="stars">
+
+    <i class="fa-solid fa-star " data-value="1"></i>
+    <i class="fa-solid fa-star " data-value="2"></i>
+    <i class="fa-solid fa-star " data-value="3"></i>
+    <i class="fa-solid fa-star " data-value="4"></i>
+    <i class="fa-solid fa-star " data-value="5"></i>
+
+  </div>
+
+  <div class="rating-info">
+    <span id="ratingValue">0.0</span>
+    <span class="reviews a1">(0 Reviews)</span>
+  </div>
+
+</div>
+
+
+        <h3>product description</h3>
+        <hr>
+
+        <p id="productDesc"></p>
+
+        <hr>
+
+        <h3>Warning</h3>
+        <p id="productWarning"></p>
+
+        <button class="buy-button" id="buyBtn">BUY NOW</button>
+
+    </div>
+
+</main> 
+
+<section class="reviews-section">
+
+    <h3 class="reviews-title">
+        Customer Reviews
+    </h3>
+
+    <div class="reviews-container" id="reviewsContainer">
+
+        <!-- here the users are rated the product  -->
+        <div class="review-card">
+
+            <div class="review-top">
+
+                <div class="review-user">
+                    <img src="./images/user.png" alt="">
+                    
+                    <div>
+                        <h4>John Doe</h4>
+
+                        <div class="review-stars">
+
+                            <i class="fa-solid fa-star active"></i>
+                            <i class="fa-solid fa-star active"></i>
+                            <i class="fa-solid fa-star active"></i>
+                            <i class="fa-solid fa-star active"></i>
+                            <i class="fa-solid fa-star"></i>
+
+                        </div>
+                    </div>
+                </div>
+
+                <span class="review-date">
+                    2 days ago
+                </span>
+
+            </div>
+
+            <p class="review-comment">
+                Amazing product. Delivery was instant and everything worked perfectly.
+            </p>
+            <hr class="custom-hr">
+
+        </div>
+        </div>
+
+
+            <!-- SHOW MORE BUTTON -->
+<section id="usercommenthere" class="reviews"></section>
+
+    <hr class="custom-hr">
+
+    <button class="show-more-btn" id="showMoreBtn">
+        Show More Reviews
+    </button>
+
+</section>
+
+
+
+
+    <section class="products" id="relatedProducts">
+</section>
+
+
+
+
+        <script>
+            function getProductId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
+
+async function loadProduct() {
+  const id = getProductId();
+
+  const res = await fetch("./api/getProducts.php");
+  const products = await res.text();
+
+  console.log(products)
+
+  const p = products.find(prod => prod.product_id == id);
+
+  if (!p) {
+    alert("Product not found");
+    return;
+  }
+
+  // Rating value
+  document.getElementById("ratingValue").innerText = p.rating_average;
+  
+  // Reviews count (FIXED)
+  document.querySelector(".rating-info .reviews").innerText = `(${p.rating_count} Reviews)`;
+
+  // Product stars
+  const productStars = document.querySelectorAll(".rating-system .stars i");
+  const roundedRating = Math.round(p.rating_average);
+
+  productStars.forEach(star => {
+    const value = parseInt(star.dataset.value);
+    if (value <= roundedRating) {
+      star.classList.add("active");
+    } else {
+      star.classList.remove("active");
+    }
+  });
+
+  // Product info
+  document.getElementById("productName").innerText = p.product_name_en;
+  document.getElementById("productPrice").innerText = `$${p.sell_price}`;
+  document.getElementById("productDesc").innerText = p.description_en;
+  document.getElementById("productWarning").innerText = p.warning_en;
+  document.getElementById("productImage").src = p.product_image;
+
+
+  const buyBtn = document.getElementById("buyBtn");
+
+
+
+buyBtn.addEventListener("click", () => {
+  window.location.href = `./checkout.html?id=${p.product_id}`;
+});
+  // Optional: old price & discount
+  if (p.old_price) {
+    document.getElementById("productOldPrice").innerText = `$${p.old_price}`;
+    const discount = ((p.old_price - p.sell_price) / p.old_price * 100).toFixed(0);
+    document.getElementById("discoutperantage").innerText = `${discount}% OFF`;
+  }
+}
+
+
+
+
+async function loadRelatedProducts() {
+
+  const currentId = getProductId();
+
+  const res = await fetch("./api/getProducts.php");
+  const products = await res.json();
+
+  const container = document.getElementById("relatedProducts");
+
+  container.innerHTML = "";
+
+  products.forEach(p => {
+
+    // optional: skip current product
+    if (p.product_id == currentId) return;
+
+    container.innerHTML += `
+      <div class="card">
+
+        <img class="product-image"
+             src="${p.product_image}"
+             alt="${p.product_name_en}">
+
+        <h2>${p.product_name_en}</h2>
+
+        <h3>$${p.sell_price}</h3>
+
+        <div class="button-container">
+          <a href="./product.html?id=${p.product_id}"
+             class="buy-button">
+             Buy
+          </a>
+        </div>
+
+      </div>
+    `;
+  });
+}
+loadRelatedProducts();
+loadProduct();
+
+
+        </script>
+     
+            <script src="./swal.js"></script>
+
+            <script src="./index.js"></script>
+                  <script src="./resizingcss.js"></script>
+                              <script src="./starsystemhoverandclicks.js"></script>
+                              <script src="./reviewload-and-sumbit.js"></script>
+
+
+
+
+
+</body>
+  </html>

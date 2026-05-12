@@ -1,0 +1,145 @@
+/* Layout */
+/* ===== HEADER ACTIONS ===== */
+/* =========================
+   UNIFIED ACTION SYSTEM
+========================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* SAME HEIGHT FOR EVERYTHING */
+.purchase-btn,
+.notif,
+.profile {
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================
+   PURCHASE BUTTON (LABELED)
+========================= */
+.purchase-btn {
+  padding: 0 12px;
+  gap: 8px;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.purchase-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* =========================
+   ICONS
+========================= */
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+
+/* =========================
+   NOTIFICATION
+========================= */
+.notif {
+  width: 38px;
+  justify-content: center;
+
+  position: relative;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  cursor: pointer;
+}
+
+.notif:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #ff3b3b;
+  border-radius: 50%;
+  top: 6px;
+  right: 6px;
+}
+
+/* =========================
+   PROFILE
+========================= */
+.profile {
+  position: relative;
+
+  padding: 0 10px;
+  gap: 8px;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 15px;
+  color: white;
+}
+
+.dropdown-icon {
+  width: 14px;
+  height: 14px;
+  fill: #ccc;
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 110%;
+
+  display: none;
+  flex-direction: column;
+
+  min-width: 160px;
+
+  background: rgba(10, 12, 30, 0.85);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.dropdown a {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown a:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.active {
+  display: flex;
+}

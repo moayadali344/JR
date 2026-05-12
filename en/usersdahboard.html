@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="userdash.css">
+
+</head>
+<body>
+
+
+    
+    <header class="header user-dashboard-header">
+        <div class="logo">
+            <a href="./index.html">            <span class="logo__primary">JR</span><span class="logo__secondary">SHOP</span>
+</a>
+        </div>
+
+
+		<div class="form-container">
+        <input  type="text" class="search-bar" placeholder="Search">
+		<button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; "><path d="M11 2a9 9 0 105.641 16.01.966.966 0 00.152.197l3.5 3.5a1 1 0 101.414-1.414l-3.5-3.5a1 1 0 00-.197-.153A8.96 8.96 0 0020 11a9 9 0 00-9-9Zm0 2a7 7 0 110 14 7 7 0 010-14Z"></path></svg></button>
+</div>
+        <div class="header__actions">
+<button class="btn mobiles-search-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; "><path d="M11 2a9 9 0 105.641 16.01.966.966 0 00.152.197l3.5 3.5a1 1 0 101.414-1.414l-3.5-3.5a1 1 0 00-.197-.153A8.96 8.96 0 0020 11a9 9 0 00-9-9Zm0 2a7 7 0 110 14 7 7 0 010-14Z"></path></svg></button>
+<button class="btn btn--secondary">Sign In</button>
+<button class="btn btn--primary">Sign Up</button>
+
+        </div>
+
+
+    </header>
+
+ 
+<main class="user-dashboard-container">
+<!-- PROFILE SECTION -->
+<section class="profile-section card">
+    <div class="profile-left">
+        <img src="./images/products/test.png" alt="Profile" class="profile-pic">
+        
+        <div class="profile-info">
+            <h3 class="username">John Doe</h3>
+            <p class="member-since">Member since 2024</p>
+        </div>
+    </div>
+
+    <div class="profile-settings">
+        ⚙️
+    </div>
+</section>
+
+<!-- PURCHASES SECTION -->
+<section class="purchases-section card">
+  <h2 class="section-title">My Purchases</h2>
+
+  <!-- SUCCESS - NETFLIX -->
+  <div class="purchase-card">
+
+    <div class="icon-box">
+      <img src="./images/products/netflix.png" alt="Netflix logo">
+      <span>Netflix</span>
+    </div>
+
+    <div class="purchase-actions">
+
+      <div class="purchase-meta">
+        <span class="date">18 Apr 2026</span>
+        <span class="price">$12.99</span>
+      </div>
+
+      <button class="credentials-btn">
+        Show Credentials
+      </button>
+
+      <span class="status success">
+        <svg class="noti" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+                   10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5
+                   1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        Success
+      </span>
+
+    </div>
+  </div>
+
+  <!-- PENDING - SPOTIFY -->
+  <div class="purchase-card">
+
+    <div class="icon-box">
+      <img src="./images/products/spotify-logo.jpg" alt="Spotify logo">
+      <span>Spotify</span>
+    </div>
+
+    <div class="purchase-actions">
+
+      <div class="purchase-meta">
+        <span class="date">18 Apr 2026</span>
+        <span class="price">$5.99</span>
+      </div>
+
+      <button class="credentials-btn" disabled>
+        Processing...
+      </button>
+
+      <span class="status pending">
+        <svg class="noti" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10
+                   C17.52 22 22 17.52 22 12S17.52 2 11.99 2z
+                   M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8
+                   8 3.58 8 8-3.58 8-8 8zm.5-13H11v6
+                   l5.25 3.15.75-1.23-4.5-2.67z"/>
+        </svg>
+        Pending
+      </span>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS - DISNEY+ -->
+  <div class="purchase-card">
+
+    <div class="icon-box">
+      <img src="./images/products/dineyplus.webp" alt="Disney+ logo">
+      <span>Disney+</span>
+    </div>
+
+    <div class="purchase-actions">
+
+      <div class="purchase-meta">
+        <span class="date">17 Apr 2026</span>
+        <span class="price">$9.99</span>
+      </div>
+
+      <button class="credentials-btn">
+        Show Credentials
+      </button>
+
+      <span class="status success">
+        <svg class="noti" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+                   10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5
+                   1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        Success
+      </span>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS - HBO MAX -->
+  <div class="purchase-card">
+
+    <div class="icon-box">
+      <img src="./images/products/hbomax.jpg" alt="HBO Max logo">
+      <span>HBO Max</span>
+    </div>
+
+    <div class="purchase-actions">
+
+      <div class="purchase-meta">
+        <span class="date">16 Apr 2026</span>
+        <span class="price">$8.99</span>
+      </div>
+
+      <button class="credentials-btn">
+        Show Credentials
+      </button>
+
+      <span class="status success">
+        <svg class="noti" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+                   10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5
+                   1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        Success
+      </span>
+
+    </div>
+  </div>
+
+</section>
+</main>
+      <script src="./resizingcss.js"></script>
+
+
+</body>
+  </html>
