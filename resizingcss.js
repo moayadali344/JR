@@ -8,7 +8,7 @@ const checkoutcard= document.querySelector("#checkoutmain")
 
 try {
            checkoutcard.style.marginTop = header.getClientRects()[0].height  + "px"
-                      checkoutcard.style.marginBottom = header.getClientRects()[0].height  *2 + "px"
+                      checkoutcard.style.marginBottom = header.getClientRects()[0].height   + "px"
 
 
 

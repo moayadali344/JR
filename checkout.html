@@ -21,9 +21,10 @@
 
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 
-    padding: 140px var(--leftrightpadding) 60px;
+    padding: 0 var(--leftrightpadding) 60px;
+    flex-direction: column;
 }
 
 /* MAIN CARD */
@@ -185,7 +186,9 @@
   align-items: center;
 }
 
-
+.wrapper-1 {
+    display: flex;
+}
 .payment-card {
   width: 10%;
   height: 67%;
@@ -288,6 +291,92 @@
 
 /* SUBMIT BUTTON */
 
+
+.checkout-status-header {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 900px; /* Matches Card Width from image_3b2e5f.jpg */
+    backdrop-filter: blur(10px);
+}
+
+/* 2. TOP PILL */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(112, 161, 255, 0.1);
+    color: #70a1ff;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.pulse-icon {
+    width: 8px;
+    height: 8px;
+    background: #70a1ff;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 8px #70a1ff;
+}
+
+/* 3. GRID SYSTEM */
+.instruction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.instruction-card {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.card-icon {
+    background: rgba(255, 255, 255, 0.08);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #70a1ff;
+    flex-shrink: 0;
+}
+
+.card-text strong {
+    display: block;
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.card-text p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.highlight {
+    color: #70a1ff;
+    text-decoration: underline;
+}
+
+/* 4. MOBILE ADAPTATION */
+@media (max-width: 768px) {
+    .instruction-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
 .checkout-submit-btn{
 
     width: 100%;
@@ -320,6 +409,18 @@
     opacity: 0.95;
 }
 
+
+
+.payment-half{
+  max-height: 567px;
+  margin-left: 10px;
+  width: 450px;
+}
+
+.left-in-1{
+      display: flex;
+    flex-direction: column;
+}
 /* MOBILE */
 
 @media(max-width:850px){
@@ -392,17 +493,53 @@
 
 <main id="checkoutmain" class="checkout-layout">
 
-    <!-- LEFT SIDE -->
-    <div class="payment-half-1">
+    <h3 class="colorwhite">CHECKOUT AND STEPS</h3>
+<div class="checkout-status-header">
+    <div class="status-pill">
+        <span class="pulse-icon"></span> Verification time: 15-30 Mins (on work hours) 
+    </div>
+    
+    <div class="instruction-grid">
+        <!-- Step 1 -->
+        <div class="instruction-card">
+            <div class="card-icon">1</div>
+            <div class="card-text">
+                <strong>Upload Proof</strong>
+                <p>Screenshot must show ID, Date, and Amount.</p>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="instruction-card">
+            <div class="card-icon">2</div>
+            <div class="card-text">
+                <strong>Track Order</strong>
+                <p>You can monitor your request status and access your bought items in the  <span class="highlight">My Purchases</span> t</p>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="instruction-card">
+            <div class="card-icon">?</div>
+            <div class="card-text">
+                <strong>Support</strong>
+                <p>feel cofused or have custom request ? or Wrong amount paid? <a class="highlight" href="">Contact support immediately</a> .</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper-1">
+        <!-- LEFT SIDE -->
+    <div class="payment-half card checkout-section">
 
         <!-- ORDER SUMMARY -->
-        <div class="checkout-section">
+        <div class="checkout-section  ">
 
             <h3 class="checkout-section-title">
                 Order Summary
             </h3>
 
-            <div class="checkout-product">
+            <div class="checkout-product left-in-1 ">
 
                 <img
                     class="checkout-product-image"
@@ -435,9 +572,10 @@
     </div>
 
     <!-- RIGHT SIDE -->
-    <div class="payment-half-2">
+    <div class="payment-half card checkout-section">
 
-        <!-- PAYMENT METHODS -->
+        <div class="checkout-section">
+            <!-- PAYMENT METHODS -->
         <div class="checkout-section">
 
             <h3 class="checkout-section-title">
@@ -459,10 +597,10 @@
 
                         <img
                             src="./images/paymentmethods/mboktest.png"
-                            alt="Zain Cash"
+                            alt="mbok button choice"
                         >
 
-                        <span>Zain Cash</span>
+                        <span>mbok</span>
 
                     </div>
 
@@ -480,10 +618,10 @@
 
                         <img
                             src="./images/paymentmethods/cashi.png"
-                            alt="Bankily"
+                            alt="cashi button"
                         >
 
-                        <span>Bankily</span>
+                        <span>Cashi</span>
 
                     </div>
 
@@ -553,17 +691,21 @@
         </button>
 
     </div>
+        </div>
 
-</main>
-
+</div>
 <!-- TRUST BADGES -->
-<div class="trust-badges">
+
+<div class="trust-badges card">
 
     <span>🛡️ SSL Secured</span>
 
     <span>✅ Verified Seller</span>
 
 </div>
+</main>
+
+
     <footer class="footer ">
 
 		<h2 class="contact-us">contact us</h2>
