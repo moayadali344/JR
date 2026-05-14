@@ -5,7 +5,7 @@ errorEl.style.marginTop = "8px";
 errorEl.style.display = "block";
 errorEl.style.marginBottom = "8px";
 
-const cachedUser = sessionStorage.getItem("user");
+const cachedUser = sessionStorage.getItem("jrstoreuser#^8");
 if (cachedUser) {
   // already logged in → redirect
   window.location.href = "./index.html";
@@ -72,7 +72,7 @@ errorEl.textContent = data.message;
     }
 
     // ✅ SAVE USER (IMPORTANT)
-    sessionStorage.setItem("user", JSON.stringify(data.user));
+    sessionStorage.setItem("jrstoreuser#^8", JSON.stringify(data.user));
 
     // 🔄 REDIRECT
     window.location.href = "./index.html";

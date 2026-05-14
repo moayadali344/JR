@@ -101,7 +101,7 @@ if (logoutBtn) {
     .then(() => {
 
       // clear sessionStorage
-      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("jrstoreuser#^8");
 
       // redirect
       window.location.href = "./index.html";

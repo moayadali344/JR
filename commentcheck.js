@@ -4,7 +4,7 @@ let currentUser = null;
 
 function checkAuthAndSetupReviews() {
     // Check sessionStorage first (same as index.js)
-    const cachedUser = sessionStorage.getItem("user");
+    const cachedUser = sessionStorage.getItem("jrstoreuser#^8");
     
     if (cachedUser) {
         currentUser = JSON.parse(cachedUser);
@@ -19,11 +19,11 @@ function checkAuthAndSetupReviews() {
             // IMPORTANT: Your API returns { loggedIn: true/false, user: {...} }
             if (data.loggedIn === true && data.user) {
                 currentUser = data.user;
-                sessionStorage.setItem("user", JSON.stringify(currentUser));
+                sessionStorage.setItem("jrstoreuser#^8", JSON.stringify(currentUser));
                 enableReviewWriting();
             } else {
                 currentUser = null;
-                sessionStorage.removeItem("user");
+                sessionStorage.removeItem("jrstoreuser#^8");
                 disableReviewWriting();
             }
         })
@@ -41,9 +41,6 @@ function enableReviewWriting() {
         reviewSection.style.display = "block";
     }
     
-
-    
-
 
 }
 

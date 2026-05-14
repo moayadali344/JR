@@ -1,7 +1,7 @@
 const container = document.querySelector(".header-actions");
 
 // 1. check sessionStorage FIRST
-const cachedUser = sessionStorage.getItem("user");
+const cachedUser = sessionStorage.getItem("jrstoreuser#^8");
 
 if (cachedUser) {
 
@@ -22,13 +22,13 @@ if (cachedUser) {
 
       const user = data.user;
 
-      sessionStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("jrstoreuser#^8", JSON.stringify(user));
 
       renderUser(user);
 
     } else {
 
-      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("jrstoreuser#^8");
 
       container.innerHTML = `
         <a  href="./login.html" class="btn btn--secondary">Sign In</a>

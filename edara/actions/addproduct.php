@@ -1,4 +1,8 @@
+
+
 <?php
+
+require "./session-checker.php";
 require "../../api/db.php";
 
 header('Content-Type: application/json');

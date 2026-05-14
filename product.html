@@ -206,20 +206,51 @@ async function loadProduct() {
         document.getElementById("salelabel").style.display = "inline"
 
     document.getElementById("productOldPrice").innerText = `$${p.price_before_discount}`;
-    const discount = ((p.old_price - p.sell_price) / p.old_price * 100).toFixed(0);
-    document.getElementById("discoutperantage").innerText = `${discount}% OFF`;
+  
   }
 
-
-  const buyBtn = document.getElementById("buyBtn");
-
-
+const buyBtn = document.getElementById("buyBtn");
 
 buyBtn.addEventListener("click", () => {
-  window.location.href = `./checkout.html?id=${p.product_id}`;
-});
- 
-}
+  const cachedUser = sessionStorage.getItem("jrstoreuser#^8");
+
+  if (cachedUser) {
+    const user = JSON.parse(cachedUser);
+    window.location.href = `./checkout.html?id=${p.product_id}`;
+  } else {
+    fetch("/api/me.php", {
+      credentials: "include"
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.loggedIn) {
+        const user = data.user;
+        sessionStorage.setItem("jrstoreuser#^8", JSON.stringify(user));
+        window.location.href = `./checkout.html?id=${p.product_id}`;
+      } else {
+        Swal.fire({
+          icon: "info",
+          title: "Join us",
+          text: "Please login or create an account to buy and checkout this product.",
+          background: "#1b1d22",
+          color: "#fff",
+          confirmButtonText: "Login",
+          confirmButtonColor: "#70a1ff",
+          showCancelButton: true,
+          cancelButtonText: "Sign Up",
+          cancelButtonColor: "#ff4757"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "./login.html";
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            window.location.href = "./login.html?autosignup";
+          }
+        });
+      }
+    })
+    .catch(err => console.error("Auth check failed:", err)); // ← was missing
+  }
+});}
 
 
 

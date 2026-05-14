@@ -1,5 +1,6 @@
 <?php
 require "../../api/db.php";
+require "./session-checker.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 

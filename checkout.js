@@ -76,10 +76,12 @@ async function loadProduct() {
 
     /* OLD PRICE */
 
-    document.querySelector(
+   if(parseInt(p.discount_percentage) > 0){
+     document.querySelector(
         ".checkout-old-price"
     ).textContent =
         "$" + currentProduct.old_price;
+   }
 }
 
 /* =========================
